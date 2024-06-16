@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Pixel.cpp" />
     <ClCompile Include="Raster graphics.cpp" />
     <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h" />
+    <ClInclude Include="Pixel.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="Vector.hpp" />
   </ItemGroup>
