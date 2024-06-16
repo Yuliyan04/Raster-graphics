@@ -31,28 +31,3 @@ const String& Image::getMagicNumber() const
 {
     return magicNumber;
 }
-
-void Image::setWidth(unsigned _width)
-{
-    width = _width;
-}
-
-void Image::setHeight(unsigned _height) 
-{
-    height = _height;
-}
-
-void Image::setMaxColorNumber(uint16_t _maxColorNumber)
-{
-    maxColorNumber = _maxColorNumber;
-}
-
-void Image::setImageName(const String& _imageName) 
-{
-    imageName = _imageName;
-}
-
-void Image::setMagicNumber(const String& _magicNumber) 
-{
-    magicNumber = _magicNumber;
-}

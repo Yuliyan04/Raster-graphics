@@ -19,6 +19,7 @@ public:
     virtual void monochrome() = 0;
     virtual void negative() = 0;
     virtual void rotate(const String& direction) = 0;
+    virtual void save() const = 0;
 
     virtual Image* clone() const = 0;
 
@@ -30,11 +31,5 @@ public:
     uint16_t getMaxColorNumber() const;
     const String& getImageName() const;
     const String& getMagicNumber() const;
-
-    void setWidth(unsigned width);
-    void setHeight(unsigned height);
-    void setMaxColorNumber(uint16_t maxColorNumber);
-    void setImageName(const String& imageName);
-    void setMagicNumber(const String& magicNumber);
 };
 
