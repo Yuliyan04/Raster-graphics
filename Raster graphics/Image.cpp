@@ -1,12 +1,11 @@
 #include "Image.h"
 
-Image::Image(unsigned width, unsigned height, uint16_t maxColorNumber, const String& imageName, const String& magicNumber, const String& direction)
+Image::Image(unsigned width, unsigned height, uint16_t maxColorNumber, const String& imageName, const String& magicNumber)
     : width(width), 
     height(height), 
     maxColorNumber(maxColorNumber), 
     imageName(imageName), 
-    magicNumber(magicNumber), 
-    direction(direction) {}
+    magicNumber(magicNumber){}
 
 unsigned Image::getWidth() const 
 {
@@ -33,11 +32,6 @@ const String& Image::getMagicNumber() const
     return magicNumber;
 }
 
-const String& Image::getDirection() const 
-{
-    return direction;
-}
-
 void Image::setWidth(unsigned _width)
 {
     width = _width;
@@ -62,9 +56,3 @@ void Image::setMagicNumber(const String& _magicNumber)
 {
     magicNumber = _magicNumber;
 }
-
-void Image::setDirection(const String& _direction) 
-{
-    direction = _direction;
-}
-
