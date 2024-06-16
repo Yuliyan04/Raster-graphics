@@ -6,7 +6,7 @@ class Image
 {
 protected:
 	unsigned width = 0;
-	unsigned hight = 0;
+	unsigned height = 0;
 	uint16_t maxColorNumber = 0;
 	String imageName;
 	String magicNumber;
