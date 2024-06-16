@@ -13,6 +13,7 @@ void BitSet::free()
 	bucketsCount = 0;
 	buckets = nullptr;
 }
+
 void BitSet::copyFrom(const BitSet& other)
 {
 	buckets = new uint8_t[other.bucketsCount];
@@ -30,6 +31,7 @@ BitSet::BitSet(const BitSet& other)
 {
 	copyFrom(other);
 }
+
 BitSet& BitSet::operator=(const BitSet& other)
 {
 	if (this != &other)
@@ -39,6 +41,7 @@ BitSet& BitSet::operator=(const BitSet& other)
 	}
 	return *this;
 }
+
 BitSet::~BitSet()
 {
 	free();
@@ -88,7 +91,9 @@ void BitSet::print() const
 	for (int i = 0; i <= N; i++)
 	{
 		if (contains(i))
+		{
 			std::cout << i << " ";
+		}
 	}
 
 	std::cout << '}' << std::endl;
