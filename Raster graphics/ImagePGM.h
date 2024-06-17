@@ -11,7 +11,6 @@ private:
 
 public:
     ImagePGM(unsigned width, unsigned height, unsigned maxColorNumber, const String& magicNumber, const String& fileName, const uint8_t* const* pixels);
-
     ImagePGM(unsigned width, unsigned height, unsigned maxColorNumber, const String& magicNumber, const String& fileName, uint8_t**&& pixels);
 
     ImagePGM(const ImagePGM& other);

@@ -25,6 +25,7 @@ public:
     virtual void monochrome() = 0;
     virtual void negative() = 0;
     virtual void rotate(const String& direction) = 0;
+
     virtual void save() const = 0;
 
     virtual Image* clone() const = 0;

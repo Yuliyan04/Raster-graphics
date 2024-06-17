@@ -36,6 +36,9 @@
     <ClCompile Include="ImagePGM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ImagePPM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="String.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ImagePGM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImagePPM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
