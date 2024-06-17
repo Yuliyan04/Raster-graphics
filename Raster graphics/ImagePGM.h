@@ -28,7 +28,7 @@ public:
     
     void save()const override;
 
-    
+  
     Image* clone() const override;
 
 private:
