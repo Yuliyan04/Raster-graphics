@@ -16,12 +16,8 @@ public:
     void negative() override;
     void rotate(const String& direction) override;
 
-    void save(const String& fileName) const override;
+    void save() const override;
 
     virtual Image* clone() const override;
-
-    void readFromFile(std::ifstream& file) override;
-    void writeToFile(std::ofstream& file) const override;
-
 };
 
