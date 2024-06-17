@@ -6,12 +6,6 @@
 
 class ImageFactory
 {
-public:
-    static Image* createImage(const String& fileName);
 
-private:
-    static Image* readPBM(const String& fileName);
-    static Image* readPGM(const String& fileName);
-    static Image* readPPM(const String& fileName);
 };
 
