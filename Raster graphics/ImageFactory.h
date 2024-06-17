@@ -7,7 +7,7 @@
 
 class ImageFactory
 {
-	public:
+public:
     static Image* imageFactory(const String& fileName);
 
 private:
