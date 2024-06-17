@@ -4,11 +4,10 @@
 #include "ImagePGM.h"
 #include "ImagePPM.h"
 
-
 class ImageFactory
 {
 public:
-    static Image* imageFactory(const String& fileName);
+    static Image* createImage(const String& fileName);
 
 private:
     static Image* readPBM(const String& fileName);
