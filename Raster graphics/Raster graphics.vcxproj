@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="BitSet.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="ImageCollection.cpp" />
     <ClCompile Include="ImageFactory.cpp" />
     <ClCompile Include="ImagePBM.cpp" />
     <ClCompile Include="ImagePGM.cpp" />
@@ -136,17 +137,20 @@
     <ClCompile Include="ImageUtilities.cpp" />
     <ClCompile Include="Pixel.cpp" />
     <ClCompile Include="Raster graphics.cpp" />
+    <ClCompile Include="Session.cpp" />
     <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitSet.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="ImageCollection.h" />
     <ClInclude Include="ImageFactory.h" />
     <ClInclude Include="ImagePBM.h" />
     <ClInclude Include="ImagePGM.h" />
     <ClInclude Include="ImagePPM.h" />
     <ClInclude Include="ImageUtilities.h" />
     <ClInclude Include="Pixel.h" />
+    <ClInclude Include="Session.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="Vector.hpp" />
   </ItemGroup>
