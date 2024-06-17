@@ -21,13 +21,14 @@ public:
 
     ~ImagePGM();
 
+
     void grayscale() override;
     void monochrome() override;
     void negative() override;
-    void rotate(const String& direction) override;
-
+    
     void save()const override;
 
+    
     Image* clone() const override;
 
 private:
