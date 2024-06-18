@@ -1,6 +1,7 @@
 #include "ImageCollection.h"
 
 
+
 void ImageCollection::free()
 {
     for (size_t i = 0; i < size; i++)
