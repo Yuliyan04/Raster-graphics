@@ -136,7 +136,6 @@
     <ClCompile Include="ImageUtilities.cpp" />
     <ClCompile Include="Pixel.cpp" />
     <ClCompile Include="Raster graphics.cpp" />
-    <ClCompile Include="Session.cpp" />
     <ClCompile Include="String.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +147,6 @@
     <ClInclude Include="ImagePPM.h" />
     <ClInclude Include="ImageUtilities.h" />
     <ClInclude Include="Pixel.h" />
-    <ClInclude Include="Session.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="Vector.hpp" />
   </ItemGroup>
