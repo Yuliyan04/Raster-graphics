@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="BitSet.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="ImageCollection.cpp" />
     <ClCompile Include="ImageFactory.cpp" />
     <ClCompile Include="ImagePBM.cpp" />
     <ClCompile Include="ImagePGM.cpp" />
@@ -141,6 +142,7 @@
   <ItemGroup>
     <ClInclude Include="BitSet.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="ImageCollection.h" />
     <ClInclude Include="ImageFactory.h" />
     <ClInclude Include="ImagePBM.h" />
     <ClInclude Include="ImagePGM.h" />
