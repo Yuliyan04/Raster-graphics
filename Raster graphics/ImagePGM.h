@@ -12,13 +12,10 @@ private:
 public:
     ImagePGM(unsigned width, unsigned height, unsigned maxColorNumber, const String& magicNumber, const String& fileName, const uint8_t* const* pixels);
     ImagePGM(unsigned width, unsigned height, unsigned maxColorNumber, const String& magicNumber, const String& fileName, uint8_t**&& pixels);
-
     ImagePGM(const ImagePGM& other);
     ImagePGM(ImagePGM&& other) noexcept;
-
     ImagePGM& operator=(const ImagePGM& other);
     ImagePGM& operator=(ImagePGM&& other) noexcept;
-
     ~ImagePGM();
 
 
