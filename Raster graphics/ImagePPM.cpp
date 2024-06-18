@@ -145,3 +145,13 @@ Image* ImagePPM::clone() const
 {
     return new ImagePPM(*this);
 }
+
+void ImagePPM::rotateLeft() 
+{
+    ImageUtilities::rotateLeft(pixels, width, height);
+}
+
+void ImagePPM::rotateRight()
+{
+    ImageUtilities::rotateRight(pixels, width, height);
+}

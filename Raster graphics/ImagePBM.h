@@ -1,6 +1,7 @@
 #pragma once
 #include "Image.h"
 #include "BitSet.h"
+#include "ImageUtilities.h"
 
 class ImagePBM : public Image
 {
@@ -15,6 +16,9 @@ public:
     void grayscale() override;
     void monochrome() override;
     void negative() override;
+
+    void rotateLeft() override;
+    void rotateRight() override;
     
     void save() const override;
 

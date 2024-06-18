@@ -1,6 +1,7 @@
 #pragma once
 #include "Image.h"
 #include "Pixel.h"
+#include "ImageUtilities.h"
 #include <fstream>
 
 
@@ -25,6 +26,8 @@ public:
     
     void save()const override;
 
+    void rotateLeft() override;
+    void rotateRight() override;
   
     Image* clone() const override;
 

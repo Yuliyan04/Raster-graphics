@@ -39,3 +39,41 @@ Image* ImagePBM::clone() const
 {
     return new ImagePBM(*this);
 }
+
+void ImagePBM::rotateLeft() 
+{
+    BitSet rotatedData(height * width);
+
+    for (unsigned i = 0; i < height; i++)
+    {
+        for (unsigned j = 0; j < width; j++)
+        {
+            if (imageData.contains(i * width + j)) 
+            {
+                rotatedData.add((width - 1 - j) * height + i);
+            }
+        }
+    }
+
+    std::swap(width, height);
+    imageData = std::move(rotatedData);
+}
+
+void ImagePBM::rotateRight() 
+{
+    BitSet rotatedData(height * width);
+
+    for (unsigned i = 0; i < height; i++)
+    {
+        for (unsigned j = 0; j < width; j++) 
+        {
+            if (imageData.contains(i * width + j))
+            {
+                rotatedData.add(j * height + (height - 1 - i));
+            }
+        }
+    }
+
+    std::swap(width, height);
+    imageData = std::move(rotatedData);
+}

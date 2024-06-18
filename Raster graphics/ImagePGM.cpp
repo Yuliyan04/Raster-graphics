@@ -126,3 +126,65 @@ void ImagePGM::moveFrom(ImagePGM&& other)
     pixels = other.pixels;
     other.pixels = nullptr;
 }
+
+void ImagePGM::rotateLeft() 
+{
+    Pixel** pixelArray = new Pixel * [height];
+
+    for (unsigned i = 0; i < height; i++)
+    {
+        pixelArray[i] = new Pixel[width];
+
+        for (unsigned j = 0; j < width; j++)
+        {
+            pixelArray[i][j] = Pixel(pixels[i][j], pixels[i][j], pixels[i][j]);
+        }
+    }
+
+    ImageUtilities::rotateLeft(pixelArray, width, height);
+    
+    for (unsigned i = 0; i < height; i++) 
+    {
+        for (unsigned j = 0; j < width; j++)
+        {
+            pixels[i][j] = pixelArray[i][j].getGrayscale();
+        }
+    }
+
+    for (unsigned i = 0; i < height; i++)
+    {
+        delete[] pixelArray[i];
+    }
+    delete[] pixelArray;
+}
+
+void ImagePGM::rotateRight()
+{
+    Pixel** pixelArray = new Pixel * [height];
+
+    for (unsigned i = 0; i < height; i++) 
+    {
+        pixelArray[i] = new Pixel[width];
+
+        for (unsigned j = 0; j < width; j++)
+        {
+            pixelArray[i][j] = Pixel(pixels[i][j], pixels[i][j], pixels[i][j]);
+        }
+    }
+
+    ImageUtilities::rotateRight(pixelArray, width, height);
+   
+    for (unsigned i = 0; i < height; i++) 
+    {
+        for (unsigned j = 0; j < width; j++) 
+        {
+            pixels[i][j] = pixelArray[i][j].getGrayscale();
+        }
+    }
+
+    for (unsigned i = 0; i < height; i++) 
+    {
+        delete[] pixelArray[i];
+    }
+    delete[] pixelArray;
+}
