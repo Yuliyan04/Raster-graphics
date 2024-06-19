@@ -20,7 +20,7 @@ public:
     void rotateLeft() override;
     void rotateRight() override;
     
-    void save() const override;
+    void save() const override; //TODO
 
 
     virtual Image* clone() const override;

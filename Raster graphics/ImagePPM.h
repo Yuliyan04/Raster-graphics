@@ -25,7 +25,7 @@ public:
     void monochrome() override;
     void negative() override;
 
-    void save()const override;
+    void save()const override; //TODO
 
     void rotateLeft() override;
     void rotateRight() override;
