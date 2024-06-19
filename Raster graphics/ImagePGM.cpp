@@ -188,3 +188,19 @@ void ImagePGM::rotateRight()
     }
     delete[] pixelArray;
 }
+
+void ImagePGM::writeASCII(std::ofstream& file) const 
+{
+    file << magicNumber << "\n";
+    file << width << " " << height << "\n";
+    file << maxColorNumber << "\n";
+
+    for (unsigned i = 0; i < height; i++) 
+    {
+        for (unsigned j = 0; j < width; j++) 
+        {
+            file << (int)pixels[i][j] << " ";  
+        }
+        file << "\n";
+    }
+}

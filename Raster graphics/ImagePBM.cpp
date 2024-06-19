@@ -77,3 +77,17 @@ void ImagePBM::rotateRight()
     std::swap(width, height);
     imageData = std::move(rotatedData);
 }
+
+void ImagePBM::writeASCII(std::ofstream& file) const 
+{
+    file << magicNumber << "\n";
+    file << width << " " << height << "\n";
+    for (unsigned i = 0; i < height; i++) 
+    {
+        for (unsigned j = 0; j < width; j++) 
+        {
+            file << (imageData.contains(i * width + j) ? "1 " : "0 ");
+        }
+        file << "\n";
+    }
+}

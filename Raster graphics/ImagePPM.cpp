@@ -155,3 +155,21 @@ void ImagePPM::rotateRight()
 {
     ImageUtilities::rotateRight(pixels, width, height);
 }
+
+void ImagePPM::writeASCII(std::ofstream& file) const 
+{
+    file << magicNumber << "\n";
+    file << width << " " << height << "\n";
+    file << maxColorNumber << "\n";
+
+    for (unsigned i = 0; i < height; i++) {
+
+        for (unsigned j = 0; j < width; j++)
+        {
+            file << (int)pixels[i][j].getRed() << " "
+                << (int)pixels[i][j].getGreen() << " "
+                << (int)pixels[i][j].getBlue() << " ";
+        }
+        file << "\n";
+    }
+}

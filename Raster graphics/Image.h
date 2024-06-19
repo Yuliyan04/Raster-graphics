@@ -29,6 +29,7 @@ public:
     virtual void rotateRight() = 0;
 
     virtual void save() const = 0;
+    virtual void writeASCII(std::ofstream& file) const = 0;
 
     virtual Image* clone() const = 0;
 };
