@@ -167,3 +167,66 @@ Image* ImageFactory::readPPM(const String& fileName)
     inFile.close();
     return new ImagePPM(width, height, maxColorNumber, magicNumber, fileName, pixels);
 }
+
+void ImageFactory::writePBM(const ImagePBM* image, const String& fileName) 
+{
+    std::ofstream file(fileName.c_str());
+    if (!file.is_open()) 
+    {
+        throw std::runtime_error("Failed to open file for writing");
+    }
+
+    image->writeASCII(file);
+    file.close();
+}
+
+void ImageFactory::writePGM(const ImagePGM* image, const String& fileName) 
+{
+    std::ofstream file(fileName.c_str());
+    if (!file.is_open()) 
+    {
+        throw std::runtime_error("Failed to open file for writing");
+    }
+
+    image->writeASCII(file);
+    file.close();
+}
+
+void ImageFactory::writePPM(const ImagePPM* image, const String& fileName) 
+{
+    std::ofstream file(fileName.c_str());
+    if (!file.is_open())
+    {
+        throw std::runtime_error("Failed to open file for writing");
+    }
+
+    image->writeASCII(file);
+    file.close();
+}
+
+void ImageFactory::writeImage(const Image* image, const String& fileName) 
+{
+    const ImagePBM* pbmImage = (const ImagePBM*)image;
+    if (pbmImage) 
+    {
+        writePBM(pbmImage, fileName);
+        return;
+    }
+
+  
+    const ImagePGM* pgmImage = (const ImagePGM*)image;
+    if (pgmImage) 
+    {
+        writePGM(pgmImage, fileName);
+        return;
+    }
+
+    const ImagePPM* ppmImage = (const ImagePPM*)image;
+    if (ppmImage) 
+    {
+        writePPM(ppmImage, fileName);
+        return;
+    }
+
+    throw std::runtime_error("Unsupported image type");
+}

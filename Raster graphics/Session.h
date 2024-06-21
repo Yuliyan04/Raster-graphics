@@ -9,10 +9,14 @@
 
 
 class Session
-{
-public:
-    static int sIdCounter;
+{   
+private:
+    int sessionID;
+    ImageCollection images;
+    Vector<String> unsavedTransformations;
+    static int counterID;
 
+public:
     Session();
     Session(const Session& other);
     Session(Session&& other) noexcept;
@@ -20,39 +24,24 @@ public:
     Session& operator=(Session&& other) noexcept;
     ~Session();
 
-    int getId() const;
-
     void addImage(Image* image);
 
     void rotate(const String& direction);
-
     void grayscale();
     void monochrome();
     void negative();
 
-    void saveChanges();
-    void saveAs(const String& fileName);
-
     void undo();
-
     void close();
-
-    String info() const;
+    String info() const; //TODO
 
     bool containsFile(const String& fileLocation) const;
-
-    bool areThereUnsavedChanges() const;
+    bool hasUnsavedChanges() const;
+    int getID() const;
 
 private:
-    int nId;
-    ImageCollection images;
-    Vector<String> unsavedTransformations;
-
-    void saveImageToFile(Image* image, const String& fileName);
-
+    void free();
     void copyFrom(const Session& other);
     void moveFrom(Session&& other);
-    void free();
-
 };
 
