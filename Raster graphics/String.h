@@ -30,6 +30,7 @@ public:
     friend String operator+(const String& lhs, const String& rhs);
 
     String substr(size_t begin, size_t howMany) const;
+    static String toString(int value);
 
 private:
     explicit String(size_t stringLength);

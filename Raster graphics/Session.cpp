@@ -161,3 +161,51 @@ int Session::getID() const
 {
     return sessionID;
 }
+
+void Session::save()
+{
+    for (size_t i = 0; i < images.getSize(); i++)
+    {
+        ImageFactory::writeImage(images.getImage(i), images.getImage(i)->getImageName());
+    }
+    unsavedTransformations.clear();
+}
+
+void Session::saveAs(const String& fileName)
+{
+    if (images.getSize() == 0) 
+    {
+        throw std::runtime_error("No images to save");
+    }
+
+    ImageFactory::writeImage(images.getImage(0), fileName);
+    unsavedTransformations.clear();
+}
+
+String Session::info() const 
+{
+    String result;
+    result += "Session ID: ";
+    result += String::toString(sessionID);
+    result += "\n";
+
+    result += "Names of images in the session: ";
+
+    for (size_t i = 0; i < images.getSize(); i++) 
+    {
+        result += images.getImage(i)->getImageName();
+        result += " ";
+    }
+    result += "\n";
+
+    result += "Pending transformations: ";
+
+    for (size_t i = 0; i < unsavedTransformations.getSize(); i++)
+    {
+        result += unsavedTransformations[i];
+        result += " ";
+    }
+    result += "\n";
+
+    return result;
+}

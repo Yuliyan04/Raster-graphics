@@ -24,7 +24,6 @@ public:
     void monochrome() override;
     void negative() override;
     
-    void save()const override; //TODO
     void writeASCII(std::ofstream& file) const override;
 
     void rotateLeft() override;

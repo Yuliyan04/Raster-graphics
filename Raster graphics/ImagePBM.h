@@ -20,7 +20,6 @@ public:
     void rotateLeft() override;
     void rotateRight() override;
     
-    void save() const override; //TODO
     void writeASCII(std::ofstream& file) const override;
 
 

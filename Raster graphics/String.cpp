@@ -180,6 +180,46 @@ String String::substr(size_t begin, size_t howMany) const
     return res;
 }
 
+unsigned getNumberLength(unsigned int n)
+{
+    if (n == 0)
+    {
+        return 1;
+    }
+
+    unsigned int res = 0;
+
+    while (n != 0)
+    {
+        res++;
+        n /= 10;
+    }
+    return res;
+}
+
+char getCharFromDigit(unsigned int digit)
+{
+    return '0' + digit;
+}
+
+void toString(unsigned int n, char* str)
+{
+    unsigned int len = getNumberLength(n);
+
+    for (int i = len - 1; i >= 0; i--)
+    {
+        str[i] = getCharFromDigit(n % 10);
+        n /= 10;
+    }
+    str[len] = '\0';
+}
+
+String String::toString(int value) 
+{
+    char buffer[12]; 
+    ::toString(value, buffer); 
+    return String(buffer);
+}
 
 String operator+(const String& lhs, const String& rhs)
 {

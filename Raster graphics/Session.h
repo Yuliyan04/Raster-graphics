@@ -31,9 +31,11 @@ public:
     void monochrome();
     void negative();
 
+    void save();
+    void saveAs(const String& fileName);
     void undo();
     void close();
-    String info() const; //TODO
+    String info() const; 
 
     bool containsFile(const String& fileLocation) const;
     bool hasUnsavedChanges() const;
