@@ -20,7 +20,6 @@ public:
 
     size_t getSize() const;
     Image* getImage(size_t index) const;
-    Image* removeImage(size_t index);
 
 private:
     void resize(size_t newCap);

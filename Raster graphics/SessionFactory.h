@@ -13,8 +13,8 @@ private:
 public:
     SessionFactory();
 
-    void loadSession(const String& fileName);
-    void addImageToCurrentSession(Image* image);
+    void load(const String& fileName);
+    void add(Image* image);
     void switchSession(int sessionId);
 
     void grayscale();

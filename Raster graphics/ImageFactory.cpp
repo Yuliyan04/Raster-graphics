@@ -230,3 +230,4 @@ void ImageFactory::writeImage(const Image* image, const String& fileName)
 
     throw std::runtime_error("Unsupported image type");
 }
+

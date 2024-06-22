@@ -2,14 +2,18 @@
 
 
 
-void ImageCollection::free()
+void ImageCollection::free() 
 {
-    for (size_t i = 0; i < size; i++)
+    if (data) 
     {
-        delete data[i];
+        for (size_t i = 0; i < size; i++)
+        {
+            delete data[i];
+            data[i] = nullptr;
+        }
+        delete[] data;
+        data = nullptr; 
     }
-    delete[] data;
-    data = nullptr;
     size = 0;
     capacity = 0;
 }
@@ -118,21 +122,4 @@ Image* ImageCollection::getImage(size_t index) const
         throw std::out_of_range("Index out of range");
     }
     return data[index];
-}
-
-Image* ImageCollection::removeImage(size_t index) 
-{
-    if (index >= size)
-    {
-        throw std::out_of_range("Index out of range");
-    }
-    Image* removedImage = data[index];
-
-    for (size_t i = index; i < size - 1; i++)
-    {
-        data[i] = data[i + 1];
-    }
-    size--;
-
-    return removedImage;
 }

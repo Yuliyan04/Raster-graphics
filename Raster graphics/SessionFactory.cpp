@@ -2,7 +2,7 @@
 
 SessionFactory::SessionFactory() : currentSessionId(-1) {}
 
-void SessionFactory::loadSession(const String& fileName) 
+void SessionFactory::load(const String& fileName) 
 {
     Image* newImage = ImageFactory::imageFactory(fileName);
     Session newSession;
@@ -11,7 +11,7 @@ void SessionFactory::loadSession(const String& fileName)
     currentSessionId = newSession.getID();
 }
 
-void SessionFactory::addImageToCurrentSession(Image* image) 
+void SessionFactory::add(Image* image) 
 {
     if (currentSessionId == -1) 
     {
