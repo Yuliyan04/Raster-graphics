@@ -13,7 +13,6 @@ void ImageCollection::free()
         }
         delete[] data;
         data = nullptr; 
-    }
     size = 0;
     capacity = 0;
 }
