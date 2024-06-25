@@ -29,7 +29,7 @@ int main()
         printMenu();
         std::getline(std::cin, input);
 
-        if (input == "9" || input == "exit") 
+        if (input == "8" || input == "exit") 
         {
             break;
         }

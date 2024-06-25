@@ -2,62 +2,50 @@
 
 Commands::Commands() : sessionFactory() {}
 
-void Commands::execute(const String& commandLine)
-{
-    std::istringstream iss(commandLine.c_str());
+void Commands::execute(const String& commandLine) {
+    std::stringstream ss(commandLine.c_str());
     String command;
-    iss >> command;
+    ss >> command;
 
-    if (command == "load") 
-    {
+    if (command == "load") {
         String fileName;
-        iss >> fileName;
+        ss >> fileName;
         load(fileName);
     }
-    else if (command == "save")
-    {
+    else if (command == "save") {
         save();
     }
-    else if (command == "saveas") 
-    {
+    else if (command == "saveas") {
         String fileName;
-        iss >> fileName;
+        ss >> fileName;
         saveAs(fileName);
     }
-    else if (command == "rotate") 
-    {
+    else if (command == "rotate") {
         String direction;
-        iss >> direction;
+        ss >> direction;
         rotate(direction);
     }
-    else if (command == "grayscale") 
-    {
+    else if (command == "grayscale") {
         grayscale();
     }
-    else if (command == "monochrome") 
-    {
+    else if (command == "monochrome") {
         monochrome();
     }
-    else if (command == "negative") 
-    {
+    else if (command == "negative") {
         negative();
     }
-    else if (command == "undo")
-    {
+    else if (command == "undo") {
         undo();
     }
-    else if (command == "switch")
-    {
+    else if (command == "switch") {
         int sessionId;
-        iss >> sessionId;
+        ss >> sessionId;
         switchSession(sessionId);
     }
-    else if (command == "sessioninfo")
-    {
+    else if (command == "sessioninfo") {
         sessionInfo();
     }
-    else 
-    {
+    else {
         std::cout << "Unknown command: " << command.c_str() << std::endl;
     }
 }

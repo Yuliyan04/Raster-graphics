@@ -13,7 +13,7 @@ public:
     ImageCollection(const ImageCollection& other);
     ImageCollection(ImageCollection&& other) noexcept;
     ImageCollection& operator=(const ImageCollection& other);
-    ImageCollection& operator=(ImageCollection&& other) noexcept;
+    /*ImageCollection& operator=(ImageCollection&& other) noexcept;*/
     ~ImageCollection();
 
     void addImage(Image* newImage);
@@ -27,4 +27,3 @@ private:
     void copyFrom(const ImageCollection& other);
     void moveFrom(ImageCollection&& other);
 };
-

@@ -2,17 +2,16 @@
 
 
 
-void ImageCollection::free() 
+void ImageCollection::free()
 {
-    if (data) 
+    for (size_t i = 0; i < size; i++)
     {
-        for (size_t i = 0; i < size; i++)
-        {
-            delete data[i];
-            data[i] = nullptr;
-        }
-        delete[] data;
-        data = nullptr; 
+        delete data[i];
+        data[i] = nullptr;//problem
+    }
+
+    delete[] data;
+    data = nullptr;
     size = 0;
     capacity = 0;
 }
@@ -20,7 +19,7 @@ void ImageCollection::free()
 void ImageCollection::copyFrom(const ImageCollection& other)
 {
     data = new Image * [other.capacity];
-
+    
     for (size_t i = 0; i < other.size; i++)
     {
         data[i] = other.data[i]->clone();
@@ -42,7 +41,7 @@ void ImageCollection::moveFrom(ImageCollection&& other)
 
 
 
-ImageCollection::ImageCollection() : data(nullptr), capacity(0), size(0) {}
+ImageCollection::ImageCollection() : data(nullptr), size(0), capacity(0) {};
 
 ImageCollection::ImageCollection(const ImageCollection& other)
 {
@@ -56,7 +55,7 @@ ImageCollection::ImageCollection(ImageCollection&& other) noexcept
 
 ImageCollection& ImageCollection::operator=(const ImageCollection& other)
 {
-    if (this != &other) 
+    if (this != &other)
     {
         free();
         copyFrom(other);
@@ -64,15 +63,15 @@ ImageCollection& ImageCollection::operator=(const ImageCollection& other)
     return *this;
 }
 
-ImageCollection& ImageCollection::operator=(ImageCollection&& other) noexcept 
-{
-    if (this != &other)
-    {
-        free();
-        moveFrom(std::move(other));
-    }
-    return *this;
-}
+//ImageCollection& ImageCollection::operator=(ImageCollection&& other) noexcept 
+//{
+//    if (this != &other)
+//    {
+//        free();
+//        moveFrom(std::move(other));
+//    }
+//    return *this;
+//}
 
 ImageCollection::~ImageCollection()
 {
@@ -100,14 +99,15 @@ void ImageCollection::resize(size_t newCap)
     capacity = newCap;
 }
 
-void ImageCollection::addImage(Image* newImage) 
+void ImageCollection::addImage(Image* image)
 {
-    if (size == capacity) 
+    if (size == capacity)
     {
         resize(capacity == 0 ? 1 : capacity * 2);
     }
-    data[size++] = newImage;
+    data[size++] = image;
 }
+
 
 size_t ImageCollection::getSize() const 
 {
