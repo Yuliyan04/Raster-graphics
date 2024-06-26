@@ -6,6 +6,7 @@
 #include "Vector.hpp"
 #include <sstream>
 
+
 class Session
 {
 private:

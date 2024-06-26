@@ -118,6 +118,12 @@ void Commands::saveAs(const String& fileName)
 
 void Commands::load(const String& fileName) 
 {
+    if (sessionFactory.getCurrentSessionID() != -1)
+    {
+        save();
+        commandQueue.clear();
+    }
+
     sessionFactory.load(fileName);
     std::cout << "Session with ID: " << sessionFactory.getCurrentSessionID() << " started." << std::endl;
 }
@@ -155,8 +161,10 @@ void Commands::undo()
     }
 }
 
-void Commands::switchSession(int sessionId) 
+void Commands::switchSession(int sessionId)
 {
+    save();
+    commandQueue.clear();
     sessionFactory.switchSession(sessionId);
 }
 
