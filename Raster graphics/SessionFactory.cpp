@@ -53,10 +53,6 @@ void SessionFactory::rotate(const String& direction)
     getCurrentSession()->rotate(direction);
 }
 
-void SessionFactory::undo() 
-{
-    getCurrentSession()->undo();
-}
 
 void SessionFactory::save() 
 {
@@ -91,26 +87,7 @@ Session* SessionFactory::getCurrentSession()
     throw std::runtime_error("Current session not found");
 }
 
-String SessionFactory::getCurrentSessionInfo() const 
-{
-    if (currentSessionID == -1) 
-    {
-        throw std::runtime_error("No current session.");
-    }
-
-    return sessions[currentSessionID].info();
-}
-
 int SessionFactory::getCurrentSessionID() const
 {
     return currentSessionID;
-}
-
-bool SessionFactory::hasUnsavedChanges() const 
-{
-    if (currentSessionID == -1)
-    {
-        throw std::runtime_error("No current session.");
-    }
-    return sessions[currentSessionID].hasUnsavedChanges();
 }

@@ -13,15 +13,15 @@ Image* ImageFactory::imageFactory(const String& fileName)
     String magicNumber;
     inFile >> magicNumber;
 
-    if (magicNumber == "P1" || magicNumber == "P4") 
+    if (magicNumber == "P1") 
     {
         return readPBM(fileName);
     }
-    else if (magicNumber == "P2" || magicNumber == "P5") 
+    else if (magicNumber == "P2") 
     {
         return readPGM(fileName);
     }
-    else if (magicNumber == "P3" || magicNumber == "P6") 
+    else if (magicNumber == "P3") 
     {
         return readPPM(fileName);
     }
@@ -50,41 +50,21 @@ Image* ImageFactory::readPBM(const String& fileName)
 
     BitSet data(width * height);
 
-    if (magicNumber == "P1") 
+    for (unsigned i = 0; i < height; i++)
     {
-        for (unsigned i = 0; i < height; i++) 
+        for (unsigned j = 0; j < width; j++)
         {
-            for (unsigned j = 0; j < width; j++) 
-            {
-                int value;
-                inFile >> value;
+            int value;
+            inFile >> value;
 
-                if (value == 1) 
-                {
-                    data.add(i * width + j);
-                }
+            if (value == 1)
+            {
+                data.add(i * width + j);
             }
         }
     }
-    else if (magicNumber == "P4") 
-    {
-        for (unsigned i = 0; i < height; i++)
-        {
-            for (unsigned j = 0; j < width; j++) 
-            {
-                unsigned char num;
-
-                inFile.read((char*)&num, sizeof(num));
-
-                if (num) 
-                {
-                    data.add(i * width + j);
-                }
-            }
-        }
-    }
-
     inFile.close();
+
     return new ImagePBM(width, height, magicNumber, fileName, std::move(data));
 }
 
@@ -109,22 +89,15 @@ Image* ImageFactory::readPGM(const String& fileName)
     {
         pixels[i] = new uint8_t[width];
 
-        if (magicNumber == "P2") 
+        for (unsigned j = 0; j < width; j++)
         {
-            for (unsigned j = 0; j < width; j++)
-            {
-                int num;
-                inFile >> num;
-                pixels[i][j] = (uint8_t)num;
-            }
-        }
-        else if (magicNumber == "P5") 
-        {
-            inFile.read((char*)pixels[i], width * sizeof(uint8_t));
+            int num;
+            inFile >> num;
+            pixels[i][j] = (uint8_t)num;
         }
     }
-
     inFile.close();
+
     return new ImagePGM(width, height, maxColorNumber, magicNumber, fileName, pixels);
 }
 
@@ -149,22 +122,15 @@ Image* ImageFactory::readPPM(const String& fileName)
     {
         pixels[i] = new Pixel[width];
 
-        if (magicNumber == "P3")
+        for (unsigned j = 0; j < width; j++)
         {
-            for (unsigned j = 0; j < width; j++)
-            {
-                int r, g, b;
-                inFile >> r >> g >> b;
-                pixels[i][j] = Pixel((unsigned char)r, (unsigned char)g, (unsigned char)b);
-            }
-        }
-        else if (magicNumber == "P6") 
-        {
-            inFile.read((char*)pixels[i], width * sizeof(Pixel));
+            int r, g, b;
+            inFile >> r >> g >> b;
+            pixels[i][j] = Pixel((unsigned char)r, (unsigned char)g, (unsigned char)b);
         }
     }
-
     inFile.close();
+
     return new ImagePPM(width, height, maxColorNumber, magicNumber, fileName, pixels);
 }
 

@@ -22,13 +22,10 @@ public:
     void negative();
     void rotate(const String& direction);
 
-    void undo();
     void save();
     void saveAs(const String& fileName);
     void close();
 
-    String getCurrentSessionInfo() const;
-    bool hasUnsavedChanges() const;
     int getCurrentSessionID() const;
 
 private:

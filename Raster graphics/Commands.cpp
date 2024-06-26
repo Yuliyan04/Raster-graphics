@@ -1,5 +1,6 @@
 #include "Commands.h"
 
+
 Commands::Commands() : sessionFactory() {}
 
 void Commands::execute(const String& commandLine) 
@@ -8,7 +9,10 @@ void Commands::execute(const String& commandLine)
     String command;
     ss >> command;
 
-    if (command == "load") 
+    Command cmd;
+    cmd.name = command;
+
+    if (command == "load")
     {
         String fileName;
         ss >> fileName;
@@ -28,21 +32,22 @@ void Commands::execute(const String& commandLine)
     {
         String direction;
         ss >> direction;
-        rotate(direction);
+        cmd.args.pushBack(direction);
+        storeCommand(cmd);
     }
     else if (command == "grayscale") 
     {
-        grayscale();
+        storeCommand(cmd);
     }
     else if (command == "monochrome")
     {
-        monochrome();
+        storeCommand(cmd);
     }
-    else if (command == "negative") 
+    else if (command == "negative")
     {
-        negative();
+        storeCommand(cmd);
     }
-    else if (command == "undo") 
+    else if (command == "undo")
     {
         undo();
     }
@@ -62,26 +67,59 @@ void Commands::execute(const String& commandLine)
         ss >> fileName;
         add(fileName);
     }
-    else 
+    else
     {
         std::cout << "Unknown command: " << command.c_str() << std::endl;
     }
 }
 
-void Commands::load(const String& fileName)
+void Commands::storeCommand(const Command& cmd)
 {
-    sessionFactory.load(fileName);
-    std::cout << "Session with ID: " << sessionFactory.getCurrentSessionID() << " started." << std::endl;
+    commandQueue.pushBack(cmd);
 }
 
-void Commands::save()
+void Commands::applyCommands() 
 {
+    for (size_t i = 0; i < commandQueue.getSize(); i++)
+    {
+        const Command& cmd = commandQueue[i];
+
+        if (cmd.name == "rotate")
+        {
+            rotate(cmd.args[0]);
+        }
+        else if (cmd.name == "grayscale") 
+        {
+            grayscale();
+        }
+        else if (cmd.name == "monochrome")
+        {
+            monochrome();
+        }
+        else if (cmd.name == "negative") 
+        {
+            negative();
+        }
+    }
+    commandQueue.clear();
+}
+
+void Commands::save() 
+{
+    applyCommands();
     sessionFactory.save();
 }
 
 void Commands::saveAs(const String& fileName) 
 {
+    applyCommands();
     sessionFactory.saveAs(fileName);
+}
+
+void Commands::load(const String& fileName) 
+{
+    sessionFactory.load(fileName);
+    std::cout << "Session with ID: " << sessionFactory.getCurrentSessionID() << " started." << std::endl;
 }
 
 void Commands::rotate(const String& direction) 
@@ -94,32 +132,51 @@ void Commands::grayscale()
     sessionFactory.grayscale();
 }
 
-void Commands::monochrome() 
+void Commands::monochrome()
 {
     sessionFactory.monochrome();
 }
 
-void Commands::negative() 
+void Commands::negative()
 {
     sessionFactory.negative();
 }
 
 void Commands::undo()
 {
-    sessionFactory.undo(); //fix 
+    if (commandQueue.getSize() > 0) 
+    {
+        commandQueue.popBack();
+        std::cout << "Last command undone." << std::endl;
+    }
+    else
+    {
+        std::cout << "No commands to undo." << std::endl;
+    }
 }
 
-void Commands::switchSession(int sessionId)
+void Commands::switchSession(int sessionId) 
 {
     sessionFactory.switchSession(sessionId);
 }
 
 void Commands::sessionInfo() const 
 {
-    std::cout << sessionFactory.getCurrentSessionInfo() << std::endl; //fix
+    std::cout << "Pending commands:" << std::endl;
+
+    for (size_t i = 0; i < commandQueue.getSize(); i++)
+    {
+        std::cout << commandQueue[i].name.c_str();
+        for (size_t j = 0; j < commandQueue[i].args.getSize(); j++)
+        {
+            std::cout << " " << commandQueue[i].args[j].c_str();
+        }
+
+        std::cout << std::endl;
+    }
 }
 
-void Commands::add(const String& fileName) 
+void Commands::add(const String& fileName)
 {
     Image* newImage = ImageFactory::imageFactory(fileName);
 
@@ -130,5 +187,6 @@ void Commands::add(const String& fileName)
     }
 
     sessionFactory.add(newImage);
-    std::cout << "Image \"" << fileName.c_str() << "\" added to session " << sessionFactory.getCurrentSessionID() << std::endl;
+
+    std::cout<<"Image added to session successfully" << std::endl;
 }
