@@ -65,7 +65,7 @@ ImagePGM::~ImagePGM()
     free();
 }
 
-// PGM images are greyscaled by default
+// PGM images are grayscaled by default
 void ImagePGM::grayscale() 
 {
 }
@@ -131,34 +131,65 @@ void ImagePGM::rotateLeft()
 {
     Pixel** pixelArray = new Pixel * [height];
 
-    for (unsigned i = 0; i < height; i++)
+    for (unsigned i = 0; i < height; i++) 
     {
         pixelArray[i] = new Pixel[width];
 
-        for (unsigned j = 0; j < width; j++)
+        for (unsigned j = 0; j < width; j++) 
         {
             pixelArray[i][j] = Pixel(pixels[i][j], pixels[i][j], pixels[i][j]);
         }
     }
 
-    ImageUtilities::rotateLeft(pixelArray, width, height);
-    
-    for (unsigned i = 0; i < height; i++) 
+    Pixel** rotatedArray = new Pixel * [width];
+
+    for (unsigned i = 0; i < width; i++) 
     {
-        for (unsigned j = 0; j < width; j++)
-        {
-            pixels[i][j] = pixelArray[i][j].getGrayscale();
-        }
+        rotatedArray[i] = new Pixel[height];
     }
 
     for (unsigned i = 0; i < height; i++)
     {
+        for (unsigned j = 0; j < width; j++) 
+        {
+            rotatedArray[width - 1 - j][i] = pixelArray[i][j];
+        }
+    }
+
+    uint8_t** newPixels = new uint8_t * [width];
+    for (unsigned i = 0; i < width; i++) 
+    {
+        newPixels[i] = new uint8_t[height];
+        for (unsigned j = 0; j < height; j++) 
+        {
+            newPixels[i][j] = rotatedArray[i][j].getGrayscale();
+        }
+    }
+
+    for (unsigned i = 0; i < height; i++) 
+    {
+        delete[] pixels[i];
+    }
+    delete[] pixels;
+
+    pixels = newPixels;
+
+    for (unsigned i = 0; i < height; i++) 
+    {
         delete[] pixelArray[i];
     }
     delete[] pixelArray;
+
+    for (unsigned i = 0; i < width; i++) 
+    {
+        delete[] rotatedArray[i];
+    }
+    delete[] rotatedArray;
+
+    std::swap(width, height);
 }
 
-void ImagePGM::rotateRight()
+void ImagePGM::rotateRight() 
 {
     Pixel** pixelArray = new Pixel * [height];
 
@@ -166,27 +197,57 @@ void ImagePGM::rotateRight()
     {
         pixelArray[i] = new Pixel[width];
 
-        for (unsigned j = 0; j < width; j++)
+        for (unsigned j = 0; j < width; j++) 
         {
             pixelArray[i][j] = Pixel(pixels[i][j], pixels[i][j], pixels[i][j]);
         }
     }
 
-    ImageUtilities::rotateRight(pixelArray, width, height);
-   
+    Pixel** rotatedArray = new Pixel * [width];
+    for (unsigned i = 0; i < width; i++)
+    {
+        rotatedArray[i] = new Pixel[height];
+    }
+
     for (unsigned i = 0; i < height; i++) 
     {
         for (unsigned j = 0; j < width; j++) 
         {
-            pixels[i][j] = pixelArray[i][j].getGrayscale();
+            rotatedArray[j][height - 1 - i] = pixelArray[i][j];
         }
     }
+
+    uint8_t** newPixels = new uint8_t * [width];
+    for (unsigned i = 0; i < width; i++) 
+    {
+        newPixels[i] = new uint8_t[height];
+        for (unsigned j = 0; j < height; j++) 
+        {
+            newPixels[i][j] = rotatedArray[i][j].getGrayscale();
+        }
+    }
+
+    for (unsigned i = 0; i < height; i++) 
+    {
+        delete[] pixels[i];
+    }
+    delete[] pixels;
+
+    pixels = newPixels;
 
     for (unsigned i = 0; i < height; i++) 
     {
         delete[] pixelArray[i];
     }
     delete[] pixelArray;
+
+    for (unsigned i = 0; i < width; i++)
+    {
+        delete[] rotatedArray[i];
+    }
+    delete[] rotatedArray;
+
+    std::swap(width, height);
 }
 
 void ImagePGM::writeASCII(std::ofstream& file) const 

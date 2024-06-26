@@ -7,7 +7,7 @@ void ImageCollection::free()
     for (size_t i = 0; i < size; i++)
     {
         delete data[i];
-        data[i] = nullptr;//problem
+        data[i] = nullptr;
     }
 
     delete[] data;
@@ -63,15 +63,15 @@ ImageCollection& ImageCollection::operator=(const ImageCollection& other)
     return *this;
 }
 
-//ImageCollection& ImageCollection::operator=(ImageCollection&& other) noexcept 
-//{
-//    if (this != &other)
-//    {
-//        free();
-//        moveFrom(std::move(other));
-//    }
-//    return *this;
-//}
+ImageCollection& ImageCollection::operator=(ImageCollection&& other) noexcept 
+{
+    if (this != &other)
+    {
+        free();
+        moveFrom(std::move(other));
+    }
+    return *this;
+}
 
 ImageCollection::~ImageCollection()
 {

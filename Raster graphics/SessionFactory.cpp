@@ -1,6 +1,6 @@
 #include "SessionFactory.h"
 
-SessionFactory::SessionFactory() : currentSessionId(-1) {}
+SessionFactory::SessionFactory() : currentSessionID(-1) {}
 
 void SessionFactory::load(const String& fileName) 
 {
@@ -8,12 +8,12 @@ void SessionFactory::load(const String& fileName)
     Session newSession;
     newSession.addImage(newImage);
     sessions.pushBack(newSession);
-    currentSessionId = newSession.getID();
+    currentSessionID = newSession.getID();
 }
 
 void SessionFactory::add(Image* image) 
 {
-    if (currentSessionId == -1) 
+    if (currentSessionID == -1) 
     {
         throw std::runtime_error("No active session");
     }
@@ -26,7 +26,7 @@ void SessionFactory::switchSession(int sessionId)
     {
         if (sessions[i].getID() == sessionId)
         {
-            currentSessionId = sessionId;
+            currentSessionID = sessionId;
             return;
         }
     }
@@ -70,12 +70,12 @@ void SessionFactory::saveAs(const String& fileName)
 
 void SessionFactory::close()
 {
-    if (currentSessionId == -1) 
+    if (currentSessionID == -1) 
     {
         throw std::runtime_error("No active session");
     }
     getCurrentSession()->close();
-    currentSessionId = -1;
+    currentSessionID = -1;
 }
 
 
@@ -83,7 +83,7 @@ Session* SessionFactory::getCurrentSession()
 {
     for (size_t i = 0; i < sessions.getSize(); i++) 
     {
-        if (sessions[i].getID() == currentSessionId) 
+        if (sessions[i].getID() == currentSessionID) 
         {
             return &sessions[i];
         }
@@ -93,19 +93,24 @@ Session* SessionFactory::getCurrentSession()
 
 String SessionFactory::getCurrentSessionInfo() const 
 {
-    if (currentSessionId == -1) 
+    if (currentSessionID == -1) 
     {
         throw std::runtime_error("No current session.");
     }
 
-    return sessions[currentSessionId].info();
+    return sessions[currentSessionID].info();
+}
+
+int SessionFactory::getCurrentSessionID() const
+{
+    return currentSessionID;
 }
 
 bool SessionFactory::hasUnsavedChanges() const 
 {
-    if (currentSessionId == -1)
+    if (currentSessionID == -1)
     {
         throw std::runtime_error("No current session.");
     }
-    return sessions[currentSessionId].hasUnsavedChanges();
+    return sessions[currentSessionID].hasUnsavedChanges();
 }

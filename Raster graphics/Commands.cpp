@@ -2,7 +2,7 @@
 
 Commands::Commands() : sessionFactory() {}
 
-void Commands::execute(const String& commandLine)
+void Commands::execute(const String& commandLine) 
 {
     std::stringstream ss(commandLine.c_str());
     String command;
@@ -24,7 +24,7 @@ void Commands::execute(const String& commandLine)
         ss >> fileName;
         saveAs(fileName);
     }
-    else if (command == "rotate") 
+    else if (command == "rotate")
     {
         String direction;
         ss >> direction;
@@ -34,7 +34,7 @@ void Commands::execute(const String& commandLine)
     {
         grayscale();
     }
-    else if (command == "monochrome") 
+    else if (command == "monochrome")
     {
         monochrome();
     }
@@ -52,11 +52,18 @@ void Commands::execute(const String& commandLine)
         ss >> sessionId;
         switchSession(sessionId);
     }
-    else if (command == "sessioninfo") 
+    else if (command == "info") 
     {
         sessionInfo();
     }
-    else {
+    else if (command == "add") 
+    {
+        String fileName;
+        ss >> fileName;
+        add(fileName);
+    }
+    else 
+    {
         std::cout << "Unknown command: " << command.c_str() << std::endl;
     }
 }
@@ -64,6 +71,7 @@ void Commands::execute(const String& commandLine)
 void Commands::load(const String& fileName)
 {
     sessionFactory.load(fileName);
+    std::cout << "Session with ID: " << sessionFactory.getCurrentSessionID() << " started." << std::endl;
 }
 
 void Commands::save()
@@ -98,7 +106,7 @@ void Commands::negative()
 
 void Commands::undo()
 {
-    sessionFactory.undo();
+    sessionFactory.undo(); //fix 
 }
 
 void Commands::switchSession(int sessionId)
@@ -108,5 +116,19 @@ void Commands::switchSession(int sessionId)
 
 void Commands::sessionInfo() const 
 {
-    std::cout << sessionFactory.getCurrentSessionInfo() << std::endl;
+    std::cout << sessionFactory.getCurrentSessionInfo() << std::endl; //fix
+}
+
+void Commands::add(const String& fileName) 
+{
+    Image* newImage = ImageFactory::imageFactory(fileName);
+
+    if (!newImage) 
+    {
+        std::cout << "Error: Failed to load image from file: " << fileName << std::endl;
+        return;
+    }
+
+    sessionFactory.add(newImage);
+    std::cout << "Image \"" << fileName.c_str() << "\" added to session " << sessionFactory.getCurrentSessionID() << std::endl;
 }

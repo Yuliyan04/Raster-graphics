@@ -8,7 +8,7 @@ class SessionFactory
 {
 private:
     Vector<Session> sessions;
-    int currentSessionId;
+    int currentSessionID;
 
 public:
     SessionFactory();
@@ -29,6 +29,7 @@ public:
 
     String getCurrentSessionInfo() const;
     bool hasUnsavedChanges() const;
+    int getCurrentSessionID() const;
 
 private:
     Session* getCurrentSession();

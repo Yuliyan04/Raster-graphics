@@ -2,7 +2,7 @@
 
 Pixel::Pixel() : r(0), g(0), b(0) {}
 
-Pixel::Pixel(unsigned char grayscale) : r(grayscale), g(grayscale), b(grayscale) {}
+Pixel::Pixel(char grayscale) : r(grayscale), g(grayscale), b(grayscale) {}
 
 Pixel::Pixel(unsigned char red, unsigned char green, unsigned char blue) : r(red), g(green), b(blue) {}
 
@@ -11,7 +11,7 @@ bool Pixel::isGray() const
     return r == g && g == b;
 }
 
-unsigned char Pixel::getGrayscale() const 
+char Pixel::getGrayscale() const 
 {
     return 0.3 * r + 0.59 * g + 0.11 * b;
 }
