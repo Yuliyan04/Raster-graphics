@@ -6,10 +6,8 @@
 #include "Vector.hpp"
 #include <sstream>
 
-
-
 class Session
-{   
+{
 private:
     int sessionID;
     ImageCollection images;
@@ -18,11 +16,6 @@ private:
 
 public:
     Session();
-    Session(const Session& other);
-    Session(Session&& other) noexcept;
-    Session& operator=(const Session& other);
-    Session& operator=(Session&& other) noexcept;
-    ~Session();
 
     void addImage(Image* image);
 
@@ -35,15 +28,10 @@ public:
     void saveAs(const String& fileName);
     void undo();
     void close();
-    String info() const; 
+    String info() const;
 
     bool containsFile(const String& fileLocation) const;
     bool hasUnsavedChanges() const;
     int getID() const;
-
-private:
-    void free();
-    void copyFrom(const Session& other);
-    void moveFrom(Session&& other);
 };
 

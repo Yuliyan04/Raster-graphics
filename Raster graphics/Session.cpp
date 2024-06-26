@@ -5,69 +5,7 @@ int Session::counterID = 0;
 
 
 
-void Session::free()
-{
-    for (size_t i = 0; i < images.getSize(); i++) 
-    {
-        delete images.getImage(i);
-    }
-
-    images = ImageCollection();
-
-    unsavedTransformations.clear();
-}
-
-void Session::copyFrom(const Session& other)
-{
-    sessionID = other.sessionID;
-    images = other.images;
-    unsavedTransformations = other.unsavedTransformations;
-}
-
-void Session::moveFrom(Session&& other)
-{
-    sessionID = other.sessionID;
-    images = std::move(other.images);
-    unsavedTransformations = std::move(other.unsavedTransformations);
-}
-
-
 Session::Session() : sessionID(++counterID) {}
-
-Session::Session(const Session& other)
-{
-    copyFrom(other);
-}
-
-Session::Session(Session&& other) noexcept 
-{
-    moveFrom(std::move(other));
-}
-
-Session& Session::operator=(const Session& other) 
-{
-    if (this != &other)
-    {
-        free();
-        copyFrom(other);
-    }
-    return *this;
-}
-
-Session& Session::operator=(Session&& other) noexcept 
-{
-    if (this != &other)
-    {
-        free();
-        moveFrom(std::move(other));
-    }
-    return *this;
-}
-
-Session::~Session() 
-{
-    free();
-}
 
 void Session::addImage(Image* image) 
 {
@@ -133,7 +71,6 @@ void Session::undo()
 
 void Session::close()
 {
-    free();
     images = ImageCollection();
     unsavedTransformations = Vector<String>();
 }
