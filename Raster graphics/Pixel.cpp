@@ -6,10 +6,6 @@ Pixel::Pixel(char grayscale) : r(grayscale), g(grayscale), b(grayscale) {}
 
 Pixel::Pixel(unsigned char red, unsigned char green, unsigned char blue) : r(red), g(green), b(blue) {}
 
-bool Pixel::isGray() const
-{
-    return r == g && g == b;
-}
 
 char Pixel::getGrayscale() const 
 {
@@ -29,29 +25,4 @@ unsigned char Pixel::getGreen() const
 unsigned char Pixel::getBlue() const 
 {
     return b;
-}
-
-void Pixel::setRed(unsigned char red) 
-{
-    r = red;
-}
-
-void Pixel::setGreen(unsigned char green) 
-{
-    g = green;
-}
-
-void Pixel::setBlue(unsigned char blue) 
-{
-    b = blue;
-}
-
-bool Pixel::operator==(const Pixel& other) const 
-{
-    return r == other.r && g == other.g && b == other.b;
-}
-
-bool Pixel::operator!=(const Pixel& other) const 
-{
-    return !(*this == other);
 }

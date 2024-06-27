@@ -12,18 +12,9 @@ public:
     Pixel(char grayscale);
     Pixel(unsigned char red, unsigned char green, unsigned char blue);
 
-    bool isGray() const;
     char getGrayscale() const;
-
     unsigned char getRed() const;
     unsigned char getGreen() const;
     unsigned char getBlue() const;
-
-    void setRed(unsigned char red);
-    void setGreen(unsigned char green);
-    void setBlue(unsigned char blue);
-
-    bool operator==(const Pixel& other) const;
-    bool operator!=(const Pixel& other) const;
 };
 
