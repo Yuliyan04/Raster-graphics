@@ -147,7 +147,8 @@ void ImagePPM::negative()
     {
         for (unsigned j = 0; j < width; j++) 
         {
-            pixels[i][j] = Pixel(maxColorNumber - pixels[i][j].getRed(),
+            pixels[i][j] = Pixel(
+                maxColorNumber - pixels[i][j].getRed(),
                 maxColorNumber - pixels[i][j].getGreen(),
                 maxColorNumber - pixels[i][j].getBlue());
         }

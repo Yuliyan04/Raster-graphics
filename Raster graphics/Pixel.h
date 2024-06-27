@@ -9,7 +9,6 @@ private:
 
 public:
     Pixel();
-    Pixel(char grayscale);
     Pixel(unsigned char red, unsigned char green, unsigned char blue);
 
     char getGrayscale() const;
