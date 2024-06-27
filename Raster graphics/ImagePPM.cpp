@@ -17,12 +17,22 @@ void ImagePPM::free()
 
 void ImagePPM::copyFrom(const ImagePPM& other)
 {
-    pixels = new Pixel * [height];
-    for (unsigned i = 0; i < height; i++)
+    free();
+
+    pixels = new Pixel * [other.height];
+
+    for (unsigned i = 0; i < other.height; i++)
     {
-        pixels[i] = new Pixel[width];
-        std::memcpy(pixels[i], other.pixels[i], width * sizeof(Pixel));
+        pixels[i] = new Pixel[other.width];
+
+        for (unsigned j = 0; j < other.width; j++)
+        {
+            pixels[i][j] = other.pixels[i][j];
+        }
     }
+
+    width = other.width;
+    height = other.height;
 }
 
 void ImagePPM::moveFrom(ImagePPM&& other)
@@ -41,7 +51,11 @@ ImagePPM::ImagePPM(unsigned width, unsigned height, unsigned maxColorNumber, con
     for (unsigned i = 0; i < height; i++)
     {
         this->pixels[i] = new Pixel[width];
-        std::memcpy(this->pixels[i], pixels[i], width * sizeof(Pixel));
+
+        for (unsigned j = 0; j < width; j++)
+        {
+            this->pixels[i][j] = pixels[i][j];
+        }
     }
 }
 

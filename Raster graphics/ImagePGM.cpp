@@ -2,13 +2,18 @@
 
 
 ImagePGM::ImagePGM(unsigned width, unsigned height, unsigned maxColorNumber, const String& magicNumber, const String& fileName, const uint8_t* const* pixels)
-    : Image(width, height, maxColorNumber, fileName, magicNumber) 
+    : Image(width, height, maxColorNumber, fileName, magicNumber)
 {
     this->pixels = new uint8_t * [height];
-    for (unsigned i = 0; i < height; i++) 
+
+    for (unsigned i = 0; i < height; i++)
     {
         this->pixels[i] = new uint8_t[width];
-        std::memcpy(this->pixels[i], pixels[i], width * sizeof(uint8_t));
+
+        for (unsigned j = 0; j < width; j++)
+        {
+            this->pixels[i][j] = pixels[i][j];
+        }
     }
 }
 
@@ -111,14 +116,26 @@ void ImagePGM::free()
     }
 }
 
-void ImagePGM::copyFrom(const ImagePGM& other)
+void ImagePGM::copyFrom(const ImagePGM& other) 
 {
-    pixels = new uint8_t * [height];
-    for (unsigned i = 0; i < height; i++) 
+    free();
+
+    pixels = new uint8_t * [other.height];
+
+    for (unsigned i = 0; i < other.height; i++)
     {
-        pixels[i] = new uint8_t[width];
-        std::memcpy(pixels[i], other.pixels[i], width * sizeof(uint8_t));
+        pixels[i] = new uint8_t[other.width];
+
+        for (unsigned j = 0; j < other.width; j++)
+        {
+            pixels[i][j] = other.pixels[i][j];
+        }
     }
+
+    width = other.width;
+    height = other.height;
+    maxColorNumber = other.maxColorNumber;
+    magicNumber = other.magicNumber;
 }
 
 void ImagePGM::moveFrom(ImagePGM&& other) 
