@@ -2,7 +2,6 @@
 #include "Session.h"
 #include "Vector.hpp"
 #include "ImageFactory.h"
-#include "Transformations.h"
 
 class SessionFactory
 {
@@ -15,7 +14,7 @@ public:
 
     void load(const String& fileName);
     void add(Image* image);
-    void switchSession(int sessionId);
+    void switchSession(int sessionID);
 
     void grayscale();
     void monochrome();

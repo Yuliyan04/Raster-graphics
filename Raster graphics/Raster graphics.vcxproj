@@ -141,7 +141,6 @@
     <ClCompile Include="Session.cpp" />
     <ClCompile Include="SessionFactory.cpp" />
     <ClCompile Include="String.cpp" />
-    <ClCompile Include="Transformations.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitSet.h" />
@@ -157,7 +156,6 @@
     <ClInclude Include="Session.h" />
     <ClInclude Include="SessionFactory.h" />
     <ClInclude Include="String.h" />
-    <ClInclude Include="Transformations.h" />
     <ClInclude Include="Vector.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

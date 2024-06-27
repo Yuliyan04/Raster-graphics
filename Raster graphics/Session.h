@@ -29,8 +29,6 @@ public:
     void saveAs(const String& fileName);
     void close();
 
-    bool containsFile(const String& fileLocation) const;
-    bool hasUnsavedChanges() const;
     int getID() const;
 };
 

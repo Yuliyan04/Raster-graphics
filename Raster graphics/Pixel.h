@@ -9,11 +9,11 @@ private:
 
 public:
     Pixel();
-    Pixel(char grayscale); //unsigned
+    Pixel(char grayscale);
     Pixel(unsigned char red, unsigned char green, unsigned char blue);
 
     bool isGray() const;
-    char getGrayscale() const; //unsigned
+    char getGrayscale() const;
 
     unsigned char getRed() const;
     unsigned char getGreen() const;

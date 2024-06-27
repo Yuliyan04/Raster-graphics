@@ -129,40 +129,45 @@ void ImagePGM::moveFrom(ImagePGM&& other)
 
 void ImagePGM::rotateLeft() 
 {
-    Pixel** pixelArray = new Pixel * [height];
+    uint8_t** newPixels = new uint8_t * [width];
+
+    for (unsigned i = 0; i < width; i++)
+    {
+        newPixels[i] = new uint8_t[height];
+    }
 
     for (unsigned i = 0; i < height; i++) 
     {
-        pixelArray[i] = new Pixel[width];
-
         for (unsigned j = 0; j < width; j++) 
         {
-            pixelArray[i][j] = Pixel(pixels[i][j], pixels[i][j], pixels[i][j]);
+            newPixels[width - 1 - j][i] = pixels[i][j];
         }
     }
 
-    Pixel** rotatedArray = new Pixel * [width];
+    for (unsigned i = 0; i < height; i++)
+    {
+        delete[] pixels[i];
+    }
+    delete[] pixels;
+
+    pixels = newPixels;
+    std::swap(width, height);
+}
+
+void ImagePGM::rotateRight() 
+{
+    uint8_t** newPixels = new uint8_t * [width];
 
     for (unsigned i = 0; i < width; i++) 
     {
-        rotatedArray[i] = new Pixel[height];
+        newPixels[i] = new uint8_t[height];
     }
 
     for (unsigned i = 0; i < height; i++)
     {
         for (unsigned j = 0; j < width; j++) 
         {
-            rotatedArray[width - 1 - j][i] = pixelArray[i][j];
-        }
-    }
-
-    uint8_t** newPixels = new uint8_t * [width];
-    for (unsigned i = 0; i < width; i++) 
-    {
-        newPixels[i] = new uint8_t[height];
-        for (unsigned j = 0; j < height; j++) 
-        {
-            newPixels[i][j] = rotatedArray[i][j].getGrayscale();
+            newPixels[j][height - 1 - i] = pixels[i][j];
         }
     }
 
@@ -173,80 +178,6 @@ void ImagePGM::rotateLeft()
     delete[] pixels;
 
     pixels = newPixels;
-
-    for (unsigned i = 0; i < height; i++) 
-    {
-        delete[] pixelArray[i];
-    }
-    delete[] pixelArray;
-
-    for (unsigned i = 0; i < width; i++) 
-    {
-        delete[] rotatedArray[i];
-    }
-    delete[] rotatedArray;
-
-    std::swap(width, height);
-}
-
-void ImagePGM::rotateRight() 
-{
-    Pixel** pixelArray = new Pixel * [height];
-
-    for (unsigned i = 0; i < height; i++) 
-    {
-        pixelArray[i] = new Pixel[width];
-
-        for (unsigned j = 0; j < width; j++) 
-        {
-            pixelArray[i][j] = Pixel(pixels[i][j], pixels[i][j], pixels[i][j]);
-        }
-    }
-
-    Pixel** rotatedArray = new Pixel * [width];
-    for (unsigned i = 0; i < width; i++)
-    {
-        rotatedArray[i] = new Pixel[height];
-    }
-
-    for (unsigned i = 0; i < height; i++) 
-    {
-        for (unsigned j = 0; j < width; j++) 
-        {
-            rotatedArray[j][height - 1 - i] = pixelArray[i][j];
-        }
-    }
-
-    uint8_t** newPixels = new uint8_t * [width];
-    for (unsigned i = 0; i < width; i++) 
-    {
-        newPixels[i] = new uint8_t[height];
-        for (unsigned j = 0; j < height; j++) 
-        {
-            newPixels[i][j] = rotatedArray[i][j].getGrayscale();
-        }
-    }
-
-    for (unsigned i = 0; i < height; i++) 
-    {
-        delete[] pixels[i];
-    }
-    delete[] pixels;
-
-    pixels = newPixels;
-
-    for (unsigned i = 0; i < height; i++) 
-    {
-        delete[] pixelArray[i];
-    }
-    delete[] pixelArray;
-
-    for (unsigned i = 0; i < width; i++)
-    {
-        delete[] rotatedArray[i];
-    }
-    delete[] rotatedArray;
-
     std::swap(width, height);
 }
 

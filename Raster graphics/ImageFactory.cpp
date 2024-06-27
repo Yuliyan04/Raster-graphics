@@ -2,7 +2,7 @@
 
 Image* ImageFactory::imageFactory(const String& fileName) 
 {
-    std::ifstream inFile(fileName.c_str(), std::ios::binary);
+    std::ifstream inFile(fileName.c_str());
 
     if (!inFile.is_open()) 
     {
@@ -36,7 +36,7 @@ Image* ImageFactory::imageFactory(const String& fileName)
 
 Image* ImageFactory::readPBM(const String& fileName) 
 {
-    std::ifstream inFile(fileName.c_str(), std::ios::binary);
+    std::ifstream inFile(fileName.c_str());
     if (!inFile.is_open()) 
     {
         std::cout << "Could not open file: " << fileName;
@@ -70,7 +70,7 @@ Image* ImageFactory::readPBM(const String& fileName)
 
 Image* ImageFactory::readPGM(const String& fileName)
 {
-    std::ifstream inFile(fileName.c_str(), std::ios::binary);
+    std::ifstream inFile(fileName.c_str());
 
     if (!inFile.is_open())
     {
@@ -103,7 +103,7 @@ Image* ImageFactory::readPGM(const String& fileName)
 
 Image* ImageFactory::readPPM(const String& fileName)
 {
-    std::ifstream inFile(fileName.c_str(), std::ios::binary);
+    std::ifstream inFile(fileName.c_str());
 
     if (!inFile.is_open())
     {

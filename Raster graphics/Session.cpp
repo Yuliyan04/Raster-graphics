@@ -66,24 +66,6 @@ void Session::close()
 }
 
 
-
-bool Session::containsFile(const String& fileLocation) const
-{
-    for (size_t i = 0; i < images.getSize(); i++) 
-    {
-        if (images.getImage(i)->getImageName() == fileLocation) 
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Session::hasUnsavedChanges() const 
-{
-    return !unsavedTransformations.empty();
-}
-
 int Session::getID() const 
 {
     return sessionID;
