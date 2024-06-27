@@ -7,7 +7,7 @@ void printMenu()
 {
     std::cout << "\n";
     std::cout << "|============================================|\n";
-    std::cout << "|           Raster graphics editor           |\n";
+    std::cout << "|              Raster graphics               |\n";
     std::cout << "|============================================|\n";
     std::cout << "|1. Load image - load                        |\n";
     std::cout << "|2. Add image - add                          |\n";
