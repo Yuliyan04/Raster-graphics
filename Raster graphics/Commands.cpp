@@ -5,7 +5,7 @@ Commands::Commands() : sessionFactory() {}
 
 void Commands::execute(const String& commandLine) 
 {
-    std::stringstream ss(commandLine.c_str());
+    String ss(commandLine.c_str());
     String command;
     ss >> command;
 

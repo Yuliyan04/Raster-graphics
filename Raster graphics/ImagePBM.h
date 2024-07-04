@@ -24,6 +24,6 @@ public:
 
 
 
-    virtual Image* clone() const override;
+    Image* clone() const override;
 };
 
