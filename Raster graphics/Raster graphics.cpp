@@ -31,7 +31,7 @@ void printMenu()
 int main()
 {
     Commands commandHandler;
-    std::string input;
+    String input;
 
     while (true) 
     {
