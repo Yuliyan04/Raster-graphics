@@ -29,7 +29,7 @@ public:
     void monochrome();
     void negative();
     void undo(); 
-    void switchSession(int sessionId); 
+    void switchSession(int sessionId); //
     void sessionInfo() const;
     void add(const String& fileName);
 };
